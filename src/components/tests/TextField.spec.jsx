@@ -54,8 +54,19 @@ it('엔터키를 입력하면 onEnter prop으로 등록한 함수가 호출된�
   expect(spy).toHaveBeenCalledWith('test');
 });
 
+it('포커스가 활성화되면 onFocus prop으로 등록한 함수 호출.', async () => {
+  const spy = vi.fn();
+  const { user } = await render(<TextField onFocus={spy} />);
+
+  const textInput = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
+  await user.click(textInput);
+
+  expect(spy).toHaveBeenCalled();
+});
+
 it('포커스가 활성화되면 onFocus prop으로 등록한 함수가 호출된다.', async () => {
   const spy = vi.fn();
+
   const { user } = await render(<TextField onFocus={spy} />);
 
   const textInput = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
@@ -63,6 +74,32 @@ it('포커스가 활성화되면 onFocus prop으로 등록한 함수가 호출�
   await user.click(textInput);
 
   expect(spy).toHaveBeenCalled();
+});
+
+it('포커스가 활성화되면 border 스타일 추가되어야 한다.', async () => {
+  const { user } = await render(<TextField />);
+  const textInput = screen.getByPlaceholderText('텍스트를 입력해 주세요.');
+  await user.click(textInput);
+
+  expect(textInput).toHaveStyle({
+    borderWidth: 2,
+    borderColor: 'rgb(25, 118, 210)',
+  });
+});
+
+it('mock test', async () => {
+  const spy = vi.fn();
+  spy.mockImplementation(() => 'mock return');
+
+  spy();
+  spy(1);
+  spy('a');
+  spy([1, 2], { a: 'b' });
+
+  expect(spy).toHaveBeenCalled();
+  expect(spy).toHaveBeenCalledTimes(4);
+  expect(spy).toHaveBeenCalledWith('a');
+  expect(spy).toHaveBeenCalledWith([1, 2], { a: 'b' });
 });
 
 it('포커스가 활성화되면 border 스타일이 추가된다.', async () => {

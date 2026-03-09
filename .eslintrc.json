@@ -24,6 +24,12 @@
   "rules": {
     "no-unused-vars": "warn",
     "react/prop-types": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"   // 이 부분이 lf로 되어있다면 auto로 변경
+      }
+    ],
     "import/order": [
       "error",
       {
