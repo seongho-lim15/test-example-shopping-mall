@@ -2,8 +2,7 @@ import { Typography, Button, Box } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { pageRoutes } from '../../../apiRoutes';
-
+import { pageRoutes } from '@/apiRoutes.js';
 import { useCartStore } from '@/store/cart';
 import { pick } from '@/utils/common';
 import { formatPrice, formatNumber } from '@/utils/formatter';
