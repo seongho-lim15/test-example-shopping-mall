@@ -11,6 +11,7 @@
   ],
   "env": {
     "browser": true,
+    "es2021": true, // ES2021 전역 (Promise 포함)
     "node": true
   },
   "ignorePatterns": ["node_modules/*", "dist"],
@@ -23,7 +24,15 @@
   },
   "rules": {
     "no-unused-vars": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
     "react/prop-types": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto" // 줄 바꿈 형식을 시스템에 맞게 자동으로 변환
+      }
+    ],
     "import/order": [
       "error",
       {

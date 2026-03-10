@@ -4,4 +4,20 @@ import React from 'react';
 import ErrorPage from '@/pages/error/components/ErrorPage';
 import render from '@/utils/test/render';
 
-it('"뒤로 이동" 버튼 클릭시 뒤로 이동하는 navigate(-1) 함수가 호출된다', async () => {});
+const navigateMock = vi.fn();
+
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+
+  return {
+    ...actual,
+    useNavigate: () => navigateMock,
+  };
+});
+
+it('"뒤로 이동" 버튼 클릭시 뒤로 이동하는 navigate(-1) 함수가 호출된다', async () => {
+  const { user } = await render(<ErrorPage />);
+  await user.click(screen.getByRole('button', { name: '뒤로 이동' }));
+
+  expect(navigateMock).toHaveBeenNthCalledWith(1, -1);
+});
